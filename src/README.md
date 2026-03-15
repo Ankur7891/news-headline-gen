@@ -65,7 +65,3 @@ Use the notebook workflow:
 1. Open main.ipynb
 2. Run the cells in order
 3. Change ModelName in the config cell to switch models
-
-## Notes
-
-The code is short by design and meant for understanding core ideas, not for production scale.
