@@ -105,7 +105,11 @@ class RNNSeq(BaseModel, en.Module):
         while t < max_len:
             dist, h, cov, a = self.dec(x, h, enc, cov, art)
             y = en.argmax(dist, dim=1)
+            if y.item() == 2:
+                break
             out.append(y.unsqueeze(1))
             x = y.unsqueeze(1)
             t += 1
+        if len(out) == 0:
+            return en.zeros((b, 1), dtype=art.dtype, device=art.device)
         return en.cat(out, dim=1)

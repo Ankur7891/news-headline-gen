@@ -1,3 +1,7 @@
+import sys
+import os
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "src"))
+
 from dtypes.config import DatasetConfig, TokenConfig, ModelConfig, TrainConfig
 from dtypes.enums import ModelName
 from wrappers.make import DataBuild, TokBuild, ModelBuild, TrainBuild
@@ -6,8 +10,8 @@ from wrappers.make import DataBuild, TokBuild, ModelBuild, TrainBuild
 def main():
     dcfg = DatasetConfig("dataset/news.csv")
     tcfg = TokenConfig(1)
-    mcfg = ModelConfig(ModelName.LSTM, 128, 256, 1, 4, 256)
-    trcfg = TrainConfig(8, 0.001, 1, 1.0, 0.5, 7)
+    mcfg = ModelConfig(ModelName.TRANSFORMER, 128, 256, 1, 4, 256)
+    trcfg = TrainConfig(8, 0.001, 15, 1.0, 0.5, 7)
     data = DataBuild().build(dcfg)
     tok = TokBuild().build(tcfg)
     tok.build_vocab(data.vocab_texts())

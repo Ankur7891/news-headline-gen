@@ -174,6 +174,8 @@ class TransSeq(BaseModel, en.Module):
             logp = self.decode(ys, enc, sm)
             last = logp[:, -1, :]
             y = en.argmax(last, dim=1)
+            if y.item() == 2:
+                break
             ys = en.cat([ys, y.unsqueeze(1)], dim=1)
             t += 1
         return ys[:, 1:]
